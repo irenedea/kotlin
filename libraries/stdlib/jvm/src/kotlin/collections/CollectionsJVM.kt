@@ -28,6 +28,20 @@ public fun <T> listOf(element: T): List<T> = java.util.Collections.singletonList
 public inline fun <T> java.util.Enumeration<T>.toList(): List<T> = java.util.Collections.list(this)
 
 
+/**
+ * Returns a new list with the elements of this list randomly shuffled.
+ */
+@SinceKotlin("1.2")
+public actual fun <T> Iterable<T>.shuffled(): List<T> = toMutableList().apply { shuffle() }
+
+/**
+ * Returns a new list with the elements of this list randomly shuffled
+ * using the specified [random] instance as the source of randomness.
+ */
+@SinceKotlin("1.2")
+public fun <T> Iterable<T>.shuffled(random: java.util.Random): List<T> = toMutableList().apply { shuffle(random) }
+
+
 @kotlin.internal.InlineOnly
 internal actual inline fun copyToArrayImpl(collection: Collection<*>): Array<Any?> =
     kotlin.jvm.internal.collectionToArray(collection)

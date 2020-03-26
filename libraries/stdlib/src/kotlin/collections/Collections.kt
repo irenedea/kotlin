@@ -10,6 +10,7 @@
 package kotlin.collections
 
 import kotlin.contracts.*
+import kotlin.random.Random
 
 internal object EmptyIterator : ListIterator<Nothing> {
     override fun hasNext(): Boolean = false
@@ -265,6 +266,15 @@ public inline fun <C, R> C.ifEmpty(defaultValue: () -> R): R where C : Collectio
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER") // false warning, extension takes precedence in some cases
 @kotlin.internal.InlineOnly
 public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.containsAll(elements: Collection<T>): Boolean = this.containsAll(elements)
+
+
+/**
+ * Returns a new list with the elements of this list randomly shuffled
+ * using the specified [random] instance as the source of randomness.
+ */
+@SinceKotlin("1.3")
+public fun <T> Iterable<T>.shuffled(random: Random): List<T> = toMutableList().apply { shuffle(random) }
+
 
 internal fun <T> List<T>.optimizeReadOnlyList() = when (size) {
     0 -> emptyList()

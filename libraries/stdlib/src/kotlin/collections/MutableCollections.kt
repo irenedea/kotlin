@@ -226,14 +226,6 @@ private fun <T> MutableIterable<T>.filterInPlace(predicate: (T) -> Boolean, pred
 
 
 /**
- * Returns a new list with the elements of this list randomly shuffled
- * using the specified [random] instance as the source of randomness.
- */
-@SinceKotlin("1.3")
-public fun <T> Iterable<T>.shuffled(random: Random): List<T> = toMutableList().apply { shuffle(random) }
-
-
-/**
  * Removes the element at the specified [index] from this list.
  * In Kotlin one should use the [MutableList.removeAt] function instead.
  */
