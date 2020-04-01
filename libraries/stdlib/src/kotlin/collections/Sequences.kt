@@ -115,14 +115,13 @@ public fun <T, R> Sequence<Pair<T, R>>.unzip(): Pair<List<T>, List<R>> {
 @SinceKotlin("1.4")
 public fun <T> Sequence<T>.shuffled(): Sequence<T> = shuffled(Random)
 
-@OptIn(ExperimentalStdlibApi::class)
 @SinceKotlin("1.4")
 public fun <T> Sequence<T>.shuffled(random: Random): Sequence<T> = sequence<T> {
-    val buffer = toCollection(ArrayDeque())
+    val buffer = toMutableList()
     while (buffer.isNotEmpty()) {
         val j = random.nextInt(buffer.size)
-        val first = buffer.removeFirst()
-        val value = if (j > 0) buffer.set(j - 1, first) else first
+        val last = @OptIn(ExperimentalStdlibApi::class) buffer.removeLast()
+        val value = if (j < buffer.size) buffer.set(j, last) else last
         yield(value)
     }
 }

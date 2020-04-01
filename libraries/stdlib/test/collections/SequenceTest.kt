@@ -659,13 +659,13 @@ public class SequenceTest {
         val values2 = shuffled2.toList()
 
         assertEquals(values1, values2)
-        assertEquals("[5, 4, 9, 8, 7, 1, 2, 0, 3, 6]", values1.toString())
+        assertEquals("[5, 3, 7, 9, 8, 2, 6, 0, 4, 1]", values1.toString())
 
         val values1n = shuffled1.toList()
         assertNotEquals(values1, values1n, "Each run returns new shuffle")
 
         val values42 = sequence.shuffled(Random(42)).toList()
-        assertEquals("[3, 7, 9, 4, 5, 1, 2, 6, 8, 0]", values42.toString())
+        assertEquals("[3, 6, 7, 1, 8, 2, 9, 4, 0, 5]", values42.toString())
     }
 
     @Test fun shuffledPartially() {
